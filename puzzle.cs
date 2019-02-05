@@ -28,8 +28,8 @@ public class Program
 	public static string TossCoin()
 	{
 		Console.WriteLine("Tossing a Coin ... ");
-		Random rand = new Random();
-		int x = rand.Next(0,2);
+		Random rnd = new Random();
+		int x = rnd.Next(0,2);
 		if (x == 0) {
 			Console.WriteLine("Heads");
 			return("Heads");
@@ -54,27 +54,50 @@ public class Program
 		}
 		return(newobj);
 	}
+	public static List<string> Names() {
+		Random rrr = new Random();
+		string temp="";
+		string[] ArrayNames = {"Todd","Tiffany","Charlie","Geneva","Sydney"};
+		List<string> RetNames = new List<string>();
+		for(int x = 0; x<ArrayNames.Length; x++) {
+			Console.WriteLine(ArrayNames[x]);
+		}
+		for (int y = 0; y<11;y++) {
+			int i = rrr.Next(0, ArrayNames.Length-1);
+			temp=ArrayNames[i];
+			ArrayNames[i]=ArrayNames[0];
+			ArrayNames[0]=temp;
+		}
+		for(int x = 0; x<ArrayNames.Length; x++) {
+			if (ArrayNames[x].Length>5) {
+				RetNames.Add(ArrayNames[x]);
+			}
+		}
+		foreach (string z in RetNames){
+			Console.WriteLine("-"+z);
+		}
+		return (RetNames);
+	}
 	public static double TossMultipleCoins(int y) {
 		double sum = 0;
 		Random rand = new Random();
 		int x = rand.Next(0,2);
-		if (x == 0) {
+		for (int i=0; i<y; i++) {
+			if (x == 0) {
 			Console.WriteLine("Heads");
 			sum++;
 		} else if (x == 1) {
 			Console.WriteLine("Tails");
 		}
-		for (int i=0; i<=y; i++) {
-			if (TossCoin()=="Heads") {
-				sum++;
-			}
 		}
 		return (sum/y);
 	}
-	public static string[] ListNames(
+	//public static string[] ListNames(
 	public static void Main()
 	{
 		MinMaxSum();
 		TossCoin();
 		Console.WriteLine(TossMultipleCoins(5));
+		Names();
 	}
+}
